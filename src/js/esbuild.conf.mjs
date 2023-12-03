@@ -1,30 +1,29 @@
-import { nodeExternalsPlugin } from "esbuild-node-externals";
-import { build } from "esbuild";
-import fs from "fs"
+import { nodeExternalsPlugin } from 'esbuild-node-externals'
+import { build } from 'esbuild'
+import fs from 'fs'
 
 const getFiles = (dir, ext) => {
-  return fs.readdirSync(dir, { recursive: true, encoding: "utf-8",  })
-  .map(file => {
-    return './src/' + file.replace(/\\/g, '/')
-  })
-  .filter(file => file.split('.').pop() === ext)
+  return fs.readdirSync(dir, { recursive: true, encoding: 'utf-8' })
+    .map(file => {
+      return './src/' + file.replace(/\\/g, '/')
+    })
+    .filter(file => file.split('.').pop() === ext)
 }
 
 try {
-  const files = getFiles("./src", "ts")
+  const files = getFiles('./src', 'ts')
 
   build({
     entryPoints: files,
     bundle: true,
     minify: true,
-    platform: "node",
+    platform: 'node',
     sourcemap: true,
-    tsconfig: "tsconfig.json",
+    tsconfig: 'tsconfig.json',
     plugins: [nodeExternalsPlugin()],
-    outdir: "dist",
+    outdir: 'dist'
   })
-}
-catch (err) {
+} catch (err) {
   console.log(err)
   process.exit(1)
 }
