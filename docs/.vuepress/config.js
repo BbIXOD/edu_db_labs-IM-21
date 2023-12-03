@@ -15,7 +15,7 @@ module.exports = {
     }]
   ],
   port: 3030,
-  base: '/edu_db_labs-IM-21/',
+  base: '/coursework_db-IM-21/',
   theme: 'cool',
   // dest: 'dist',
   head: [
@@ -96,7 +96,7 @@ module.exports = {
 
   },
   title: '2. Система управління відкритими даними',
-  description: 'Лабораторні роботи з дисципліни "Організація баз даних"',
+  description: 'Курсова робота з дисципліни "Організація баз даних"',
   configureWebpack: {
     resolve: {
       alias: {
