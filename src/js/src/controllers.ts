@@ -27,10 +27,10 @@ export const addNewCategory = async (request: FastifyRequest, reply: FastifyRepl
   const { name, description, postId } = request.body as { name: string, description: string, postId: string }
 
   const [rows] = await app.mysql.query('SELECT MAX(Category_id) FROM category')
-  const maxId = (rows as [{ [rowsFieldWithMaxId]: number }])[0][rowsFieldWithMaxId]
+  const categoryId = (rows as [{ [rowsFieldWithMaxId]: number }])[0][rowsFieldWithMaxId] + 1
   await app.mysql
     .query('INSERT INTO category (name, description, Post_id, Category_id) VALUES (?, ?, ?, ?) ',
-      [name, description, postId, maxId])
+      [name, description, postId, categoryId])
 
   return "Category added successfully"
 }
@@ -39,12 +39,11 @@ export const extendCategory = async (request: FastifyRequest, reply: FastifyRepl
   const { postId, categoryId } = request.body as { postId: string, categoryId: string }
 
   const result = await app.mysql
-    .execute('SELECT (name, description) FROM category WHERE id = ? LIMIT 1', [categoryId]) as RowDataPacket[][]
+    .execute('SELECT name, description FROM category WHERE id = ? LIMIT 1', [categoryId]) as RowDataPacket[][]
   
   if (result[0].length === 0) {
     return reply.code(404).send('Category not found')
   }
-    
     
   const { name, description } =(result[0] as [ { name: string, description: string}])[0]
 
