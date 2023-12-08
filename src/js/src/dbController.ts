@@ -1,8 +1,9 @@
-import mysql2 from 'mysql2'
-import * as globals from './globals.js'
+import fsql from '@fastify/mysql'
+import { app, dbHost, dbUser, dbName } from './globals.js'
 
-export default mysql2.createConnection({
-  host: globals.dbHost,
-  user: globals.dbUser,
-  database: globals.dbName
+export default () => app.register(fsql, {
+  host: dbHost,
+  user: dbUser,
+  database: dbName,
+  promise: true
 })
