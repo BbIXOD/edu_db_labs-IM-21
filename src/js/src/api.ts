@@ -23,18 +23,8 @@ app.delete('/category/:id', { schema: schemas.withId }, controllers.deleteCatego
 
 app.listen({ port }, () => console.log(`server is listening on port: ${ port }`))
 
-const stop = async () => {
-  try {
-    connection.release()
-  }
-  catch (err) {
-    console.log('Err shutting down database: ' + err)
-  }
-  app.close()
-  console.log('Server stopped')
-}
-
 process.on('SIGINT', async () => {
-  await stop();
+  connection.release();
+  console.log('db disconected. shutting down server...')
   process.exit(0);
 });

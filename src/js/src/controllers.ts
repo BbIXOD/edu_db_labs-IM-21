@@ -1,7 +1,6 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { app } from './globals.js'
 import { RowDataPacket, ResultSetHeader } from 'mysql2/promise'
-import { request } from 'http'
 
 export const test = async (request: FastifyRequest, reply: FastifyReply) => {
     const [result] = await app.mysql.query('SELECT * FROM category');
