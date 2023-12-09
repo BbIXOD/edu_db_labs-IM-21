@@ -1,5 +1,3 @@
-import exp from "constants"
-
 export const addNewCategory = {
   body: {
     type: 'object',

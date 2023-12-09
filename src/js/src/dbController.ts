@@ -1,4 +1,4 @@
-import fsql from '@fastify/mysql'
+import fsql, { MySQLPool } from '@fastify/mysql'
 import { app, dbHost, dbUser, dbName } from './globals.js'
 
 export default () => app.register(fsql, {

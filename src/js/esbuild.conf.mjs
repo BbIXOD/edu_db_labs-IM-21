@@ -2,7 +2,6 @@ import { nodeExternalsPlugin } from 'esbuild-node-externals'
 import { build } from 'esbuild'
 
 try {
-
   build({
     entryPoints: ['./src/api.ts'],
     bundle: true,

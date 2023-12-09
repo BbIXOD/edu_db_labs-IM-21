@@ -10,7 +10,7 @@ console.log('connected to db')
 app.addHook('onError', async (_request, reply, error) => {
   console.error(error)
 
-  reply.code(500).send({ message: error.message })
+  await reply.code(500).send({ message: error.message })
 })
 
 app.get('/', controllers.test)
@@ -21,10 +21,10 @@ app.post('/category/extend', { schema: schemas.extendCategory }, controllers.ext
 app.patch('/category/:id', { schema: schemas.modifyCategory }, controllers.modifyCategory)
 app.delete('/category/:id', { schema: schemas.withId }, controllers.deleteCategory)
 
-app.listen({ port }, () => console.log(`server is listening on port: ${ port }`))
+app.listen({ port }, () => console.log(`server is listening on port: ${port}`))
 
-process.on('SIGINT', async () => {
-  connection.release();
+process.on('SIGINT', () => {
+  connection.release()
   console.log('db disconected. shutting down server...')
-  process.exit(0);
-});
+  process.exit(0)
+})
