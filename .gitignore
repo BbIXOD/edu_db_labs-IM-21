@@ -1,6 +1,6 @@
 #node files
 node_modules/
-dist/
+src/js/dist/
 
 # Logs
 logs

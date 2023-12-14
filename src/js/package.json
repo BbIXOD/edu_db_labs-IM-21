@@ -9,7 +9,7 @@
     "free-port": "netstat -ano | find \"3000\" | ",
     "test": "echo \"Error: no test specified\" && exit 1",
     "execute-server": "node esbuild.conf.mjs && node dist/index.js",
-    "start": "mysql -u user < ../sql/mydb.sql && node esbuild.conf.mjs && node dist/api.js"
+    "start": "mysql -u user < ../sql/mydb.sql && node esbuild.conf.mjs && node api.js"
   },
   "repository": {
     "type": "git",
